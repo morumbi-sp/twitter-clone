@@ -42,7 +42,7 @@ const CreateAccount: NextPage = () => {
             />
             <Input
               title='Confirm Password'
-              id='password'
+              id='password2'
               type='password'
               theme='dark'
             />

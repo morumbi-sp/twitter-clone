@@ -12,7 +12,9 @@ export default function App({ Component, pageProps, router }: AppProps) {
       }}
     >
       <div className='bg-gradient-to-br from-banana to-banana-graDark w-[390px] h-[840px]'>
-        <Component key={router.pathname} {...pageProps} />
+        <AnimatePresence mode='wait'>
+          <Component key={router.pathname} {...pageProps} />
+        </AnimatePresence>
       </div>
     </SWRConfig>
   );
