@@ -1,14 +1,19 @@
-import { SWRConfig } from "swr";
-import "../global.css";
+import { SWRConfig } from 'swr';
+import '../global.css';
+import type { AppProps } from 'next/app';
+import { AnimatePresence } from 'framer-motion';
 
-export default function App({ Component, pageProps }: any) {
+export default function App({ Component, pageProps, router }: AppProps) {
   return (
     <SWRConfig
       value={{
-        fetcher: (url: string) => fetch(url).then((response) => response.json())
+        fetcher: (url: string) =>
+          fetch(url).then((response) => response.json()),
       }}
     >
-      <Component {...pageProps} />
+      <div className='bg-gradient-to-br from-banana to-banana-graDark w-[390px] h-[840px]'>
+        <Component key={router.pathname} {...pageProps} />
+      </div>
     </SWRConfig>
   );
 }

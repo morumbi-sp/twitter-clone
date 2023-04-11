@@ -5,11 +5,7 @@ interface Props {
 }
 
 const NavBox = ({ children }: Props) => {
-  return (
-    <div className='pt-8 h-full fixed top-0 bg-gradient-to-br from-banana to-banana-graDark w-full'>
-      {children}
-    </div>
-  );
+  return <div className='pt-8 w-full h-[200px]'>{children}</div>;
 };
 
 export default NavBox;

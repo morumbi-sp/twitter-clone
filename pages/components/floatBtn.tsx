@@ -1,6 +1,18 @@
+import { motion } from 'framer-motion';
+
 const FloatBtn = () => {
   return (
-    <div className='fixed bottom-8 border-[1px] shadow-lg right-8 w-[70px] h-[70px] bg-gradient-to-br from-banana to-banana-graDark aspect-square rounded-full'>
+    <motion.div
+      className='absolute bottom-8 border-[1px] shadow-lg right-8 w-[70px] h-[70px] bg-gradient-to-br from-banana to-banana-graDark aspect-square rounded-full'
+      initial={{ scale: 0 }}
+      animate={{ rotate: 360, scale: 1 }}
+      transition={{
+        type: 'spring',
+        stiffness: 260,
+        damping: 14,
+        delay: 0.4,
+      }}
+    >
       <svg
         className='h-15 w-15 fill-dark'
         version='1.1'
@@ -12,7 +24,7 @@ const FloatBtn = () => {
           fillRule='evenodd'
         />
       </svg>
-    </div>
+    </motion.div>
   );
 };
 

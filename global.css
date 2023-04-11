@@ -2,8 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+}
+
+html {
+}
+
 body {
   -ms-overflow-style: none;
+  background-color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 ::-webkit-scrollbar {
   display: none;

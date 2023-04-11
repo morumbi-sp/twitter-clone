@@ -8,12 +8,12 @@ import BigBoard from './components/bigBoard';
 
 const Login: NextPage = () => {
   return (
-    <>
+    <div className=''>
       <NavBox>
         <HeadTitle
-          firstLine=''
-          boldText='Welcome Back!'
-          secondLine='Login to continue'
+          firstLine='Welcome!'
+          boldText='Log In'
+          secondLine='to Continue.'
         />
       </NavBox>
       <BigBoard>
@@ -46,7 +46,7 @@ const Login: NextPage = () => {
           </div>
         </form>
       </BigBoard>
-    </>
+    </div>
   );
 };
 
