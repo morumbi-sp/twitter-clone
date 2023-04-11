@@ -1,4 +1,4 @@
-import { classSwitch } from '../../lib/client/utils';
+import { classSwitch } from '../lib/client/utils';
 
 interface Props {
   text: string;

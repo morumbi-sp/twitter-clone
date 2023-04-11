@@ -1,5 +1,5 @@
 import React from 'react';
-import { classSwitch } from '../../lib/client/utils';
+import { classSwitch } from '../lib/client/utils';
 import { motion } from 'framer-motion';
 
 interface Props {

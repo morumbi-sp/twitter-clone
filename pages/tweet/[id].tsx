@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import HeadTitle from './../components/headTitle';
-import NavBox from './../components/navBox';
-import Button from './../components/button';
-import BigBoard from './../components/bigBoard';
-import NavButton from '../components/navButton';
+import HeadTitle from '../../components/headTitle';
+import NavBox from '../../components/navBox';
+import Button from '../../components/button';
+import BigBoard from '../../components/bigBoard';
+import NavButton from '../../components/navButton';
 
 const DetailTweet: NextPage = () => {
   return (
@@ -29,7 +29,6 @@ const DetailTweet: NextPage = () => {
             Tweets on the database, the user should also be able to POST a
             Tweet.'
           </div>
-          <div className='bg-slate-400 rounded-xl w-full h-36'>IMAGE</div>
 
           <div className='pb-4 pt-4 flex justify-between items-center w-full space-x-4'>
             <Button text='Send Message'></Button>

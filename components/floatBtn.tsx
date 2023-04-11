@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 const FloatBtn = () => {
   return (
     <motion.div
-      className='absolute bottom-8 border-[1px] shadow-lg right-8 w-[70px] h-[70px] bg-gradient-to-br from-banana to-banana-graDark aspect-square rounded-full'
+      className='absolute bottom-12 border-[1px] shadow-lg right-8 w-[70px] h-[70px] bg-gradient-to-br from-banana to-banana-graDark aspect-square rounded-full cursor-pointer'
       initial={{ scale: 0 }}
       animate={{ rotate: 360, scale: 1 }}
       transition={{
@@ -24,6 +24,7 @@ const FloatBtn = () => {
           fillRule='evenodd'
         />
       </svg>
+      <div className='absolute top-2 left-5 text-dark text-lg'>+</div>
     </motion.div>
   );
 };

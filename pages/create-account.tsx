@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import HeadTitle from './components/headTitle';
-import NavBox from './components/navBox';
-import Input from './components/input';
-import Button from './components/button';
-import BigBoard from './components/bigBoard';
+import HeadTitle from '../components/headTitle';
+import NavBox from '../components/navBox';
+import Input from '../components/input';
+import Button from '../components/button';
+import BigBoard from '../components/bigBoard';
+import Link from 'next/link';
 
 const CreateAccount: NextPage = () => {
   return (
@@ -48,8 +49,11 @@ const CreateAccount: NextPage = () => {
           </div>
           <div className='space-y-5 pt-5'>
             <Button text='Create' />
-
-            <div className='text-center text-banana-graDark pt-8'>LOGIN</div>
+            <Link href='/log-in'>
+              <div className='text-center text-banana-graDark pt-8 cursor-pointer'>
+                LOGIN
+              </div>
+            </Link>
           </div>
         </form>
       </BigBoard>

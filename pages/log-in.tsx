@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import HeadTitle from './components/headTitle';
-import NavBox from './components/navBox';
-import Input from './components/input';
-import Button from './components/button';
-import BigBoard from './components/bigBoard';
+import HeadTitle from '../components/headTitle';
+import NavBox from '../components/navBox';
+import Input from '../components/input';
+import Button from '../components/button';
+import BigBoard from '../components/bigBoard';
+import Link from 'next/link';
 
 const Login: NextPage = () => {
   return (
@@ -42,7 +43,11 @@ const Login: NextPage = () => {
                 or
               </div>
             </div>
-            <Button text='Sign up' theme='light' />
+            <Link href='/create-account'>
+              <div>
+                <Button text='Sign up' theme='light' />
+              </div>
+            </Link>
           </div>
         </form>
       </BigBoard>

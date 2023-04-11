@@ -1,13 +1,12 @@
-import { classSwitch } from '../../lib/client/utils';
+import { classSwitch } from '../lib/client/utils';
 
 interface Props {
   id: string;
   title: string;
   theme?: 'light' | 'dark';
-  type: 'text' | 'password';
 }
 
-const Input = ({ theme = 'light', title, id, type }: Props) => {
+const TextArea = ({ theme = 'light', title, id }: Props) => {
   return (
     <div className='flex flex-col space-y-2'>
       <label
@@ -19,13 +18,13 @@ const Input = ({ theme = 'light', title, id, type }: Props) => {
       >
         {title}
       </label>
-      <input
+      <textarea
         className='text-sm border-gray-200 rounded-xl focus:border-banana focus:ring-banana'
         id={id}
-        type={type}
+        rows={4}
       />
     </div>
   );
 };
 
-export default Input;
+export default TextArea;

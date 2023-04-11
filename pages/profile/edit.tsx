@@ -1,10 +1,11 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import HeadTitle from './../components/headTitle';
-import NavBox from './../components/navBox';
-import Input from './../components/input';
-import Button from './../components/button';
-import BigBoard from './../components/bigBoard';
+import HeadTitle from '../../components/headTitle';
+import NavBox from '../../components/navBox';
+import Input from '../../components/input';
+import Button from '../../components/button';
+import BigBoard from '../../components/bigBoard';
+import Link from 'next/link';
 
 const CreateAccount: NextPage = () => {
   return (
@@ -32,7 +33,7 @@ const CreateAccount: NextPage = () => {
             </svg>
           </div>
           <button className='px-3 rounded-lg text-banana-graDark  py-1.5 text-xs border-2  border-banana-graDark hover:bg-banana-graDark hover:text-white'>
-            Add Avatar
+            Change Avatar
           </button>
         </div>
         <form className='w-full px-7 pt-2 pb-4 space-y-10'>
@@ -43,8 +44,11 @@ const CreateAccount: NextPage = () => {
           </div>
           <div className='space-y-5 pt-5'>
             <Button text='Confirm' />
-
-            <div className='text-center text-banana-graDark pt-8'>CANCEL</div>
+            <Link href='/profile'>
+              <div className='text-center text-banana-graDark pt-8 cursor-pointer'>
+                CANCEL
+              </div>
+            </Link>
           </div>
         </form>
       </BigBoard>
