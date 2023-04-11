@@ -1,13 +1,22 @@
+import { classSwitch } from '../../lib/client/utils';
+
 interface Props {
   id: string;
   title: string;
+  theme?: 'light' | 'dark';
   type: 'text' | 'password';
 }
 
-const Input = ({ title, id, type }: Props) => {
+const Input = ({ theme = 'light', title, id, type }: Props) => {
   return (
     <div className='flex flex-col space-y-2'>
-      <label className='text-myText-light text-sm' htmlFor={id}>
+      <label
+        className={classSwitch(
+          ' text-sm',
+          theme === 'light' ? 'text-myText-light' : ' text-gray-300'
+        )}
+        htmlFor={id}
+      >
         {title}
       </label>
       <input

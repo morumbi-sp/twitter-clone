@@ -6,20 +6,20 @@ import Input from './components/input';
 import Button from './components/button';
 import BigBoard from './components/bigBoard';
 
-const Login: NextPage = () => {
+const CreateAccount: NextPage = () => {
   return (
     <>
       <NavBox>
         <HeadTitle
           firstLine=''
-          boldText='Welcome Back!'
-          secondLine='Login to continue'
+          boldText='Hurry up!'
+          secondLine='Create Account'
         />
       </NavBox>
-      <BigBoard>
+      <BigBoard theme='dark'>
         <div className='w-16 h-16 bg-banana-graDark rounded-full mt-5'>
           <svg
-            className='h-16 w-16 fill-white'
+            className='h-16 w-16 fill-dark'
             version='1.1'
             viewBox='0 0 700 550'
             xmlns='http://www.w3.org/2000/svg'
@@ -30,19 +30,26 @@ const Login: NextPage = () => {
             <path d='m390.18 384.26c-5.6211 0-10.184 4.5586-10.184 10.184 0 5.4336-4.418 9.8555-9.8555 9.8555-5.4297 0-9.8477-4.418-9.8477-9.8555v-31.637c18.129-3.2422 31.258-14.875 31.258-29.23 0-5.6211-4.5586-10.184-10.184-10.184-5.6211 0-10.184 4.5586-10.184 10.184 0 3.4766-8 9.8555-21.074 9.8555s-21.074-6.3789-21.074-9.8555c0-5.6211-4.5586-10.184-10.184-10.184-5.6211 0-10.184 4.5586-10.184 10.184 0 14.355 13.129 25.988 31.258 29.23v31.637c0 5.4336-4.418 9.8555-9.8477 9.8555-5.4297 0-9.8477-4.418-9.8477-9.8555 0-5.6211-4.5586-10.184-10.184-10.184-5.6211 0-10.184 4.5586-10.184 10.184 0 16.66 13.551 30.219 30.211 30.219 7.7148 0 14.688-2.9922 20.031-7.7695 5.3438 4.7734 12.316 7.7695 20.031 7.7695 16.66 0 30.219-13.559 30.219-30.219 0.003906-5.625-4.5547-10.184-10.176-10.184z' />
           </svg>
         </div>
-        <form className='w-full px-7 pt-2 pb-8 space-y-8'>
+        <form className='w-full px-7 pt-2 pb-4 space-y-10'>
           <div className='space-y-6'>
-            <Input title='User Name' id='username' type='text' />
-            <Input title='Password' id='password' type='password' />
+            <Input title='User Name' id='username' type='text' theme='dark' />
+            <Input
+              title='Password'
+              id='password'
+              type='password'
+              theme='dark'
+            />
+            <Input
+              title='Confirm Password'
+              id='password'
+              type='password'
+              theme='dark'
+            />
           </div>
           <div className='space-y-5 pt-5'>
-            <Button text='Log in' />
-            <div className='border-b h-0 '>
-              <div className=' text-gray-400 text-sm relative -top-2.5 w-10 text-center mx-auto bg-gray-100'>
-                or
-              </div>
-            </div>
-            <Button text='Sign up' theme='light' />
+            <Button text='Create' />
+
+            <div className='text-center text-banana-graDark pt-8'>LOGIN</div>
           </div>
         </form>
       </BigBoard>
@@ -50,4 +57,4 @@ const Login: NextPage = () => {
   );
 };
 
-export default Login;
+export default CreateAccount;

@@ -6,7 +6,9 @@ interface Props {
 
 const NavBox = ({ children }: Props) => {
   return (
-    <div className='pt-8 h-full fixed top-0 bg-banana w-full'>{children}</div>
+    <div className='pt-8 h-full fixed top-0 bg-gradient-to-br from-banana to-banana-graDark w-full'>
+      {children}
+    </div>
   );
 };
 
