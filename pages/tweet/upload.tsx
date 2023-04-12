@@ -20,7 +20,7 @@ const UploadTweet: NextPage = () => {
         />
       </NavBox>
       <BigBoard>
-        <form className='w-full px-7 pt-2 pb-6 space-y-8'>
+        <form className='w-full px-7 pt-2 pb-6 space-y-12'>
           <TextArea title='Write Banana' id='banana' />
           <Button text='Throw it!' key='post' />
         </form>

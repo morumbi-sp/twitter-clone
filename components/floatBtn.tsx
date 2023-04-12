@@ -10,8 +10,9 @@ const FloatBtn = () => {
         type: 'spring',
         stiffness: 260,
         damping: 14,
-        delay: 0.4,
+        delay: 0.1,
       }}
+      whileHover={{ scale: 1.2 }}
     >
       <svg
         className='h-15 w-15 fill-dark'
