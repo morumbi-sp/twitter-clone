@@ -1,7 +1,7 @@
 import { withIronSessionApiRoute } from 'iron-session/next';
 
 const cookieOptions = {
-  cookieName: 'carrotsession',
+  cookieName: 'bananaSession',
   password: process.env.COOKIE_PASSWORD!,
 };
 

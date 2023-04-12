@@ -8,17 +8,15 @@ const handler = async (
 ) => {
   const { username, hashedPassword } = req.body;
 
-  console.log(username, hashedPassword);
-  //   const searchUser = await client.user.findUnique({
-  //     where: {
-  //       userName: username,
-  //     },
-  //   });
+  const searchUser = await client.user.findUnique({
+    where: {
+      userName: username,
+    },
+  });
 
-  //   if (searchUser) {
-  //     return res.json({ ok: false, error: 'Username is already existed!' });
-  //   }
-
+  if (searchUser) {
+    return res.json({ ok: false, error: 'Username is already existed!' });
+  }
   const user = await client.user.create({
     data: {
       userName: username,

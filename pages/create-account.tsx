@@ -45,14 +45,14 @@ const CreateAccount: NextPage = () => {
     createUser({ username, hashedPassword });
   };
 
-  // useEffect(() => {
-  //   if (data?.error) {
-  //     setError('username', {
-  //       type: 'custom',
-  //       message: data.error,
-  //     });
-  //   }
-  // }, [data]);
+  useEffect(() => {
+    if (data?.error) {
+      setError('username', {
+        type: 'custom',
+        message: data.error,
+      });
+    }
+  }, [data]);
 
   console.log(data);
   return (
