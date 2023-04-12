@@ -1,13 +1,60 @@
 import type { NextPage } from 'next';
-import React from 'react';
+import React, { useEffect } from 'react';
 import HeadTitle from '../components/headTitle';
 import NavBox from '../components/navBox';
 import Input from '../components/input';
 import Button from '../components/button';
 import BigBoard from '../components/bigBoard';
 import Link from 'next/link';
+import useMutation from '../lib/client/useMutation';
+import { useForm } from 'react-hook-form';
+import { passwordEncrypt } from '../lib/client/utils';
+import { User } from '@prisma/client';
+
+interface CreateUserForm {
+  username: string;
+  password1: string;
+  password2: string;
+}
+
+interface CreateUserResponse {
+  ok: boolean;
+  error?: string;
+  data?: User;
+}
 
 const CreateAccount: NextPage = () => {
+  const [createUser, { loading, data }] =
+    useMutation<CreateUserResponse>('/api/users/create');
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<CreateUserForm>();
+  const onValid = ({ username, password1, password2 }: CreateUserForm) => {
+    if (loading) return;
+    if (password1 !== password2) {
+      setError('password2', {
+        type: 'custom',
+        message: 'confirm password incorrect.',
+      });
+      return;
+    }
+    const hashedPassword = passwordEncrypt(password1);
+    createUser({ username, hashedPassword });
+  };
+
+  // useEffect(() => {
+  //   if (data?.error) {
+  //     setError('username', {
+  //       type: 'custom',
+  //       message: data.error,
+  //     });
+  //   }
+  // }, [data]);
+
+  console.log(data);
   return (
     <>
       <NavBox>
@@ -31,20 +78,43 @@ const CreateAccount: NextPage = () => {
             <path d='m390.18 384.26c-5.6211 0-10.184 4.5586-10.184 10.184 0 5.4336-4.418 9.8555-9.8555 9.8555-5.4297 0-9.8477-4.418-9.8477-9.8555v-31.637c18.129-3.2422 31.258-14.875 31.258-29.23 0-5.6211-4.5586-10.184-10.184-10.184-5.6211 0-10.184 4.5586-10.184 10.184 0 3.4766-8 9.8555-21.074 9.8555s-21.074-6.3789-21.074-9.8555c0-5.6211-4.5586-10.184-10.184-10.184-5.6211 0-10.184 4.5586-10.184 10.184 0 14.355 13.129 25.988 31.258 29.23v31.637c0 5.4336-4.418 9.8555-9.8477 9.8555-5.4297 0-9.8477-4.418-9.8477-9.8555 0-5.6211-4.5586-10.184-10.184-10.184-5.6211 0-10.184 4.5586-10.184 10.184 0 16.66 13.551 30.219 30.211 30.219 7.7148 0 14.688-2.9922 20.031-7.7695 5.3438 4.7734 12.316 7.7695 20.031 7.7695 16.66 0 30.219-13.559 30.219-30.219 0.003906-5.625-4.5547-10.184-10.176-10.184z' />
           </svg>
         </div>
-        <form className='w-full px-7 pt-2 pb-4 space-y-10'>
-          <div className='space-y-6'>
-            <Input title='User Name' id='username' type='text' theme='dark' />
+        <form
+          className='w-full px-7 pt-2 pb-4 space-y-10'
+          onSubmit={handleSubmit(onValid)}
+        >
+          <div className='space-y-2'>
+            <Input
+              title='User Name'
+              id='username'
+              type='text'
+              theme='dark'
+              register={register('username', {
+                required: 'username is required',
+                minLength: { value: 3, message: 'input more than 2 chars' },
+              })}
+              error={errors.username}
+            />
             <Input
               title='Password'
               id='password'
               type='password'
               theme='dark'
+              register={register('password1', {
+                required: 'password is required',
+                minLength: { value: 4, message: 'input more than 4 chars' },
+              })}
+              error={errors.password1}
             />
             <Input
               title='Confirm Password'
               id='password2'
               type='password'
               theme='dark'
+              register={register('password2', {
+                required: 'confirm password is required',
+                minLength: { value: 4, message: 'input more than 4 chars' },
+              })}
+              error={errors.password2}
             />
           </div>
           <div className='space-y-5 pt-5'>
