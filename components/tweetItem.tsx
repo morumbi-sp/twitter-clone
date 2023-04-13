@@ -1,16 +1,21 @@
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 interface Props {
   name: string;
   username: string;
   time: string;
   message: string;
-  image?: string;
+  avatar?: number;
   id: number;
 }
 
-const TweetItem = ({ name, username, time, message, image, id }: Props) => {
+const TweetItem = ({ name, username, time, message, avatar, id }: Props) => {
+  dayjs.extend(relativeTime);
+  const relativeTimeStr = dayjs(time).fromNow();
+
   return (
     <Link href={`/tweet/${id}`}>
       <motion.div
@@ -19,16 +24,18 @@ const TweetItem = ({ name, username, time, message, image, id }: Props) => {
       >
         <div className='flex justify-between items-center'>
           <div className='flex items-center space-x-4'>
-            <div className='h-12 rounded-full aspect-square bg-slate-500'></div>
+            <img
+              src={`/${avatar}.png`}
+              className='w-16 h-16 rounded-full border-accent border'
+            />
             <div>
               <div className='text-myText-darkest'>{name}</div>
               <div className='text-myText-light text-xs'>{username}</div>
             </div>
           </div>
-          <div className='text-myText-light text-xs'>{time}</div>
+          <div className='text-myText-light text-xs'>{relativeTimeStr}</div>
         </div>
         <div className='text-myText-darkest text-sm px-1 mt-2'>{message}</div>
-        <div>{image}</div>
       </motion.div>
     </Link>
   );

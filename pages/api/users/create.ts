@@ -17,11 +17,15 @@ const handler = async (
   if (searchUser) {
     return res.json({ ok: false, error: 'Username is already existed!' });
   }
+
+  const avatarNumber = Math.floor(Math.random() * 7) + 1;
+
   const user = await client.user.create({
     data: {
       userName: username,
       userNick: `@${username}`,
       password: hashedPassword,
+      avatar: avatarNumber,
     },
   });
 

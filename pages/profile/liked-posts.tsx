@@ -5,8 +5,11 @@ import HeadTitle from '@/components/headTitle';
 import TweetItem from '@/components/tweetItem';
 import NavBox from '@/components/navBox';
 import LongBoard from '@/components/longBoard';
+import useSWR from 'swr';
 
 export default () => {
+  const { data } = useSWR('/api/users/likes');
+  console.log(data);
   return (
     <>
       <NavBox>
@@ -18,13 +21,15 @@ export default () => {
         />
       </NavBox>
       <LongBoard>
-        {[1, 1, 1, 1, 1].map((_, i) => (
+        {data?.likes?.map((like) => (
           <TweetItem
-            key={i}
-            name='Morumbi'
-            username='@banana eater'
-            time='10min'
-            message='After logging in, in the Home Page, the user should see all the Tweets on the database, the user should also be able to POST a Tweet.'
+            key={like.id}
+            name={like.banana.user.userName}
+            username={like.banana.user.userNick}
+            time={like.banana.createdAt.toString()}
+            message={like.banana.message}
+            id={like.id}
+            avatar={like.banana.user.avatar}
           />
         ))}
       </LongBoard>

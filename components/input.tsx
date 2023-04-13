@@ -6,7 +6,7 @@ interface Props {
   id: string;
   title: string;
   theme?: 'light' | 'dark';
-  type: 'text' | 'password';
+  type: 'text' | 'password' | 'email';
   register: UseFormRegisterReturn;
   error?: FieldError;
 }

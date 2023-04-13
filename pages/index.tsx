@@ -14,7 +14,7 @@ export interface BananaWithUser extends Banana {
   user: User;
 }
 
-interface BananasResponse {
+export interface BananasResponse {
   ok: boolean;
   bananas: BananaWithUser[];
 }
@@ -22,7 +22,7 @@ interface BananasResponse {
 export default () => {
   const { data } = useSWR<BananasResponse>('/api/tweet');
   const { user } = useUser();
-  console.log(data);
+  console.log(data?.bananas);
   return (
     <>
       <NavBox>
@@ -34,16 +34,20 @@ export default () => {
         />
       </NavBox>
       <LongBoard>
-        {data?.bananas.map((banana) => (
-          <TweetItem
-            key={banana.id}
-            name={banana.user.userName}
-            username={banana.user.userNick}
-            time={banana.createdAt.toString()}
-            message={banana.message}
-            id={banana.id}
-          />
-        ))}
+        {data?.bananas
+          ?.slice()
+          .reverse()
+          .map((banana) => (
+            <TweetItem
+              key={banana.id}
+              name={banana.user.userName}
+              username={banana.user.userNick}
+              time={banana.createdAt.toString()}
+              message={banana.message}
+              id={banana.id}
+              avatar={banana?.user.avatar}
+            />
+          ))}
       </LongBoard>
       <Link href='/tweet/upload'>
         <div className='relative'>

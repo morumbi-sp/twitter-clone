@@ -7,8 +7,12 @@ import BigBoard from '@/components/bigBoard';
 import NavButton from '@/components/navButton';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import useSWR from 'swr';
+import useUser from '@/lib/client/useUser';
 
 const DetailTweet: NextPage = () => {
+  const { user } = useUser();
+  console.log(user);
   return (
     <>
       <NavBox>
@@ -21,14 +25,20 @@ const DetailTweet: NextPage = () => {
       </NavBox>
       <BigBoard top='wide'>
         <div className='w-full px-5 pb-2 pt-2'>
-          <div className=' flex items-center space-x-3 '>
-            <div className='w-16 h-16 bg-slate-500 rounded-full' />
-            <div className='flex flex-col items-center'>
-              <div className='text-2xl font-bold text-myText-dark'>Name</div>
-              <div className='text-xs text-myText-light'>@User Name</div>
-            </div>
+          <div className='flex flex-col items-center'>
+            <img
+              src={`/${user?.avatar}.png`}
+              className='w-20 h-20 rounded-full  border-accent border mt-5'
+            />
           </div>
-          <div className='px-2 flex justify-between mt-10 mb-20 text-myText-medium text-sm '>
+          <div className='flex flex-col items-center mt-3'>
+            <div className='text-2xl font-bold text-myText-dark'>
+              {user?.userName}
+            </div>
+            <div className='text-xs text-myText-light'>{user?.userNick}</div>
+          </div>
+
+          <div className='px-2 flex justify-around mt-10 mb-20 text-myText-medium text-sm '>
             <Link href='/profile/my-posts'>
               <motion.div
                 className='flex flex-col items-center space-y-2'
@@ -68,37 +78,6 @@ const DetailTweet: NextPage = () => {
                   </svg>
                 </button>
                 <span>Likes</span>
-              </motion.div>
-            </Link>
-            <Link href='/profile/messages'>
-              <motion.div
-                className='flex flex-col items-center space-y-2'
-                whileHover={{ scale: 1.1 }}
-              >
-                <button className='w-16 h-16 bg-banana-graDark rounded-full'>
-                  <svg
-                    className='h-12 w-12'
-                    stroke='currentColor'
-                    version='1.1'
-                    viewBox='-110 0 700 500'
-                    xmlns='http://www.w3.org/2000/svg'
-                  >
-                    <path
-                      d='m452.99 296.5-78.246 78.25c-13.664 13.672-35.828 13.672-49.492 0l-78.246-78.25-138.59 138.59c-2.2266 2.2266-3.418 5.2148-3.418 8.2461 0 6.4414 5.2266 11.668 11.668 11.668h466.66c6.4414 0 11.668-5.2266 11.668-11.668 0-3.0312-1.1914-6.0195-3.418-8.2461z'
-                      fillRule='evenodd'
-                    />
-                    <path d='m469.5 280 125.5 125.5v-251z' fillRule='evenodd' />
-                    <path
-                      d='m105 405.5 125.5-125.5-125.5-125.5z'
-                      fillRule='evenodd'
-                    />
-                    <path
-                      d='m595 116.67c0 3.0312-1.1914 6.0195-3.418 8.2461 0 0-233.33 233.34-233.33 233.34-4.5508 4.5586-11.949 4.5586-16.5 0 0 0-233.33-233.34-233.33-233.34-2.2266-2.2266-3.418-5.2148-3.418-8.2461 0-6.4414 5.2266-11.668 11.668-11.668h466.66c6.4414 0 11.668 5.2266 11.668 11.668z'
-                      fillRule='evenodd'
-                    />
-                  </svg>
-                </button>
-                <span>Messages</span>
               </motion.div>
             </Link>
           </div>

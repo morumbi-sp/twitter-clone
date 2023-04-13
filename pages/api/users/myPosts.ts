@@ -8,20 +8,13 @@ const handler = async (
   res: NextApiResponse<ResponseType>
 ) => {
   const bananas = await client.banana.findMany({
+    where: { userId: req.session.user?.id },
     include: {
-      user: {
-        select: {
-          userName: true,
-          userNick: true,
-          avatar: true,
-        },
-      },
+      user: {},
     },
   });
-  res.json({
-    ok: true,
-    bananas,
-  });
+
+  res.json({ ok: true, bananas });
 };
 
 export default withApiSession(WithHandler({ methods: ['GET'], handler }));

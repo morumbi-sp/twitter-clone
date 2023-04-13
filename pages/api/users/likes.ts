@@ -8,41 +8,29 @@ const handler = async (
   res: NextApiResponse<ResponseType>
 ) => {
   const {
-    query: { id },
     session: { user },
   } = req;
-
-  const banana = await client.banana.findUnique({
-    where: {
-      id: Number(id),
-    },
+  const likes = await client.like.findMany({
+    where: { userId: user?.id },
     include: {
-      user: {
+      banana: {
         select: {
-          userName: true,
-          userNick: true,
-          avatar: true,
+          createdAt: true,
+          message: true,
+          user: {
+            select: {
+              userName: true,
+              userNick: true,
+              avatar: true,
+            },
+          },
         },
       },
     },
   });
-
-  const isLiked = Boolean(
-    await client.like.findFirst({
-      where: {
-        bananaId: banana?.id,
-        userId: user?.id,
-      },
-      select: {
-        id: true,
-      },
-    })
-  );
-
   res.json({
     ok: true,
-    banana,
-    isLiked,
+    likes,
   });
 };
 
