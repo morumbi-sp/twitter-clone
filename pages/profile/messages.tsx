@@ -1,10 +1,10 @@
 import React from 'react';
-import NavButton from '../../components/navButton';
-import HeadTitle from '../../components/headTitle';
+import NavButton from '@/components/navButton';
+import HeadTitle from '@/components/headTitle';
 
-import TweetItem from '../../components/tweetItem';
-import NavBox from '../../components/navBox';
-import LongBoard from '../../components/longBoard';
+import TweetItem from '@/components/tweetItem';
+import NavBox from '@/components/navBox';
+import LongBoard from '@/components/longBoard';
 
 export default () => {
   return (

@@ -1,12 +1,12 @@
 import type { NextPage } from 'next';
-import React from 'react';
-import HeadTitle from '../components/headTitle';
-import NavBox from '../components/navBox';
-import Input from '../components/input';
-import Button from '../components/button';
-import BigBoard from '../components/bigBoard';
+import React, { useEffect } from 'react';
+import HeadTitle from '@/components/headTitle';
+import NavBox from '@/components/navBox';
+import Input from '@/components/input';
+import Button from '@/components/button';
+import BigBoard from '@/components/bigBoard';
 import Link from 'next/link';
-import useMutation from '../lib/client/useMutation';
+import useMutation from '@/lib/client/useMutation';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 
@@ -28,7 +28,7 @@ const Login: NextPage = () => {
 
   const router = useRouter();
   useEffect(() => {
-    if (data.ok) {
+    if (data?.ok) {
       router.push('/');
     }
   }, [data, router]);

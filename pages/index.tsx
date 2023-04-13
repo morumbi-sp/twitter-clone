@@ -1,11 +1,11 @@
 import React from 'react';
-import HeadTitle from '../components/headTitle';
-import FloatBtn from '../components/floatBtn';
-import TweetItem from '../components/tweetItem';
-import NavBox from '../components/navBox';
-import LongBoard from '../components/longBoard';
+import HeadTitle from '@/components/headTitle';
+import FloatBtn from '@/components/floatBtn';
+import TweetItem from '@/components/tweetItem';
+import NavBox from '@/components/navBox';
+import LongBoard from '@/components/longBoard';
 import Link from 'next/link';
-import useUser from '../lib/client/useUser';
+import useUser from '@/lib/client/useUser';
 import useSWR from 'swr';
 import { Banana, User } from '@prisma/client';
 import NavButton from '@/components/navButton';

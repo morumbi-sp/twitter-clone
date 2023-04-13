@@ -1,13 +1,13 @@
 import type { NextPage } from 'next';
 import React, { useEffect } from 'react';
-import HeadTitle from '../../components/headTitle';
-import NavBox from '../../components/navBox';
-import BigBoard from '../../components/bigBoard';
-import NavButton from '../../components/navButton';
-import TextArea from '../../components/textArea';
-import Button from '../../components/button';
+import HeadTitle from '@/components/headTitle';
+import NavBox from '@/components/navBox';
+import BigBoard from '@/components/bigBoard';
+import NavButton from '@/components/navButton';
+import TextArea from '@/components/textArea';
+import Button from '@/components/button';
 import Link from 'next/link';
-import useMutation from '../../lib/client/useMutation';
+import useMutation from '@/lib/client/useMutation';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 

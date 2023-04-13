@@ -1,10 +1,10 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import HeadTitle from '../../components/headTitle';
-import NavBox from '../../components/navBox';
-import Button from '../../components/button';
-import BigBoard from '../../components/bigBoard';
-import NavButton from '../../components/navButton';
+import HeadTitle from '@/components/headTitle';
+import NavBox from '@/components/navBox';
+import Button from '@/components/button';
+import BigBoard from '@/components/bigBoard';
+import NavButton from '@/components/navButton';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 

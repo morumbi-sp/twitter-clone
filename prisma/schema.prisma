@@ -17,7 +17,7 @@ model User {
   userNick  String   @unique
   password  String
   email     String?
-  avatar    String?
+  avatar    Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   banana    Banana[]

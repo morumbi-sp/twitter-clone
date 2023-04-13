@@ -1,13 +1,14 @@
 import type { NextPage } from 'next';
 import React from 'react';
-import HeadTitle from '../../components/headTitle';
-import NavBox from '../../components/navBox';
-import Button from '../../components/button';
-import BigBoard from '../../components/bigBoard';
-import NavButton from '../../components/navButton';
+import HeadTitle from '@/components/headTitle';
+import NavBox from '@/components/navBox';
+import Button from '@/components/button';
+import BigBoard from '@/components/bigBoard';
+import NavButton from '@/components/navButton';
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 import { BananaWithUser } from '..';
+import useMutation from '@/lib/client/useMutation';
 
 interface BananaResponse {
   ok: boolean;
@@ -17,9 +18,15 @@ interface BananaResponse {
 
 const DetailBanana: NextPage = () => {
   const router = useRouter();
+  const [toggleLike] = useMutation(`/api/tweet/${router.query.id}/fav`);
   const { data, mutate } = useSWR<BananaResponse>(
     `/api/tweet/${router.query.id}`
   );
+  const onLikeClick = () => {
+    if (!data) return;
+    mutate({ ...data, isLiked: !data.isLiked }, false);
+    toggleLike({});
+  };
   return (
     <>
       <NavBox>
@@ -46,12 +53,16 @@ const DetailBanana: NextPage = () => {
           <div className='pb-4 pt-4 flex justify-between items-center w-full space-x-4'>
             <Button text='Send Message'></Button>
 
-            <button className='pr-1 fill-transparent stroke-dark'>
+            <button
+              className='pr-1 fill-transparent stroke-dark text-red-500'
+              onClick={onLikeClick}
+            >
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 viewBox='0 0 24 24'
                 strokeWidth='1'
                 className='h-9 w-9'
+                fill={data?.isLiked ? 'currentColor' : 'none'}
               >
                 <path
                   strokeLinecap='round'

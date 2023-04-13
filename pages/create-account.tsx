@@ -1,14 +1,14 @@
 import type { NextPage } from 'next';
 import React, { useEffect } from 'react';
-import HeadTitle from '../components/headTitle';
-import NavBox from '../components/navBox';
-import Input from '../components/input';
-import Button from '../components/button';
-import BigBoard from '../components/bigBoard';
+import HeadTitle from '@/components/headTitle';
+import NavBox from '@/components/navBox';
+import Input from '@/components/input';
+import Button from '@/components/button';
+import BigBoard from '@/components/bigBoard';
 import Link from 'next/link';
-import useMutation from '../lib/client/useMutation';
+import useMutation from '@/lib/client/useMutation';
 import { useForm } from 'react-hook-form';
-import { passwordEncrypt } from '../lib/client/utils';
+import { passwordEncrypt } from '@/lib/client/utils';
 import { User } from '@prisma/client';
 import { useRouter } from 'next/router';
 
