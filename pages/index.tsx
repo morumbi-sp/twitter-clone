@@ -1,31 +1,47 @@
 import React from 'react';
-import NavButton from '../components/navButton';
 import HeadTitle from '../components/headTitle';
 import FloatBtn from '../components/floatBtn';
 import TweetItem from '../components/tweetItem';
 import NavBox from '../components/navBox';
 import LongBoard from '../components/longBoard';
 import Link from 'next/link';
+import useUser from '../lib/client/useUser';
+import useSWR from 'swr';
+import { Banana, User } from '@prisma/client';
+import NavButton from '@/components/navButton';
+
+export interface BananaWithUser extends Banana {
+  user: User;
+}
+
+interface BananasResponse {
+  ok: boolean;
+  bananas: BananaWithUser[];
+}
 
 export default () => {
+  const { data } = useSWR<BananasResponse>('/api/tweet');
+  const { user } = useUser();
+  console.log(data);
   return (
     <>
       <NavBox>
         <NavButton />
         <HeadTitle
           firstLine='Hello,'
-          boldText='Morumbi'
+          boldText={user?.userName}
           secondLine='Here are bananas for you.'
         />
       </NavBox>
       <LongBoard>
-        {[1, 1, 1, 1, 1].map((_, i) => (
+        {data?.bananas.map((banana) => (
           <TweetItem
-            key={i}
-            name='Morumbi'
-            username='@banana eater'
-            time='10min'
-            message='After logging in, in the Home Page, the user should see all the Tweets on the database, the user should also be able to POST a Tweet.'
+            key={banana.id}
+            name={banana.user.userName}
+            username={banana.user.userNick}
+            time={banana.createdAt.toString()}
+            message={banana.message}
+            id={banana.id}
           />
         ))}
       </LongBoard>

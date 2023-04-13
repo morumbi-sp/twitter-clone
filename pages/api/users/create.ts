@@ -20,7 +20,7 @@ const handler = async (
   const user = await client.user.create({
     data: {
       userName: username,
-      userId: `@${username}`,
+      userNick: `@${username}`,
       password: hashedPassword,
     },
   });

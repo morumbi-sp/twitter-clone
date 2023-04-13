@@ -22,7 +22,7 @@ const WithHandler = ({
     if (req.method && !methods.includes(req.method as any)) {
       res.status(405).end();
     }
-    if (isPrivate && !req.session.user) {
+    if (isPrivate && !req.session?.user) {
       return res.status(401).json({ ok: false, error: 'Please login' });
     }
     try {

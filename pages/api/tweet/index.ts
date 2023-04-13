@@ -7,12 +7,20 @@ const handler = async (
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) => {
-  const profile = await client.user.findUnique({
-    where: { id: req.session.user?.id },
+  const bananas = await client.banana.findMany({
+    include: {
+      user: {
+        select: {
+          userName: true,
+          userNick: true,
+        },
+      },
+    },
   });
-  console.log(req.session.user);
-
-  res.json({ ok: true, profile });
+  res.json({
+    ok: true,
+    bananas,
+  });
 };
 
 export default withApiSession(WithHandler({ methods: ['GET'], handler }));

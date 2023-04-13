@@ -14,10 +14,37 @@ datasource db {
 model User {
   id        Int      @id @default(autoincrement())
   userName  String   @unique
-  userId    String   @unique
+  userNick  String   @unique
   password  String
   email     String?
   avatar    String?
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  banana    Banana[]
+  like      Like[]
+}
+
+model Banana {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  message   String   @db.MediumText
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  like      Like[]
+
+  @@index([userId])
+}
+
+model Like {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  banana    Banana   @relation(fields: [bananaId], references: [id], onDelete: Cascade)
+  bananaId  Int
+
+  @@index([userId])
+  @@index([bananaId])
 }

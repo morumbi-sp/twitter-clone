@@ -6,6 +6,7 @@ import Button from '../../components/button';
 import BigBoard from '../../components/bigBoard';
 import NavButton from '../../components/navButton';
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 
 const DetailTweet: NextPage = () => {
   return (
@@ -29,7 +30,10 @@ const DetailTweet: NextPage = () => {
           </div>
           <div className='px-2 flex justify-between mt-10 mb-20 text-myText-medium text-sm '>
             <Link href='/profile/my-posts'>
-              <div className='flex flex-col items-center space-y-2'>
+              <motion.div
+                className='flex flex-col items-center space-y-2'
+                whileHover={{ scale: 1.1 }}
+              >
                 <button className='w-16 h-16 bg-banana-graDark rounded-full flex items-center justify-center'>
                   <svg
                     className='h-12 w-12'
@@ -42,10 +46,13 @@ const DetailTweet: NextPage = () => {
                   </svg>
                 </button>
                 <span>My Posts</span>
-              </div>
+              </motion.div>
             </Link>
             <Link href='/profile/liked-posts'>
-              <div className='flex flex-col items-center space-y-2'>
+              <motion.div
+                className='flex flex-col items-center space-y-2'
+                whileHover={{ scale: 1.1 }}
+              >
                 <button className='w-16 h-16 bg-banana-graDark rounded-full flex items-center justify-center'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -61,10 +68,13 @@ const DetailTweet: NextPage = () => {
                   </svg>
                 </button>
                 <span>Likes</span>
-              </div>
+              </motion.div>
             </Link>
             <Link href='/profile/messages'>
-              <div className='flex flex-col items-center space-y-2'>
+              <motion.div
+                className='flex flex-col items-center space-y-2'
+                whileHover={{ scale: 1.1 }}
+              >
                 <button className='w-16 h-16 bg-banana-graDark rounded-full'>
                   <svg
                     className='h-12 w-12'
@@ -89,7 +99,7 @@ const DetailTweet: NextPage = () => {
                   </svg>
                 </button>
                 <span>Messages</span>
-              </div>
+              </motion.div>
             </Link>
           </div>
           <Link href='profile/edit'>

@@ -5,8 +5,21 @@ import NavBox from '../../components/navBox';
 import Button from '../../components/button';
 import BigBoard from '../../components/bigBoard';
 import NavButton from '../../components/navButton';
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import { BananaWithUser } from '..';
 
-const DetailTweet: NextPage = () => {
+interface BananaResponse {
+  ok: boolean;
+  banana: BananaWithUser;
+  isLiked: boolean;
+}
+
+const DetailBanana: NextPage = () => {
+  const router = useRouter();
+  const { data, mutate } = useSWR<BananaResponse>(
+    `/api/tweet/${router.query.id}`
+  );
   return (
     <>
       <NavBox>
@@ -21,14 +34,14 @@ const DetailTweet: NextPage = () => {
         <div className='px-5 flex flex-col items-center space-y-4'>
           <div className='w-20 h-20 bg-slate-500 rounded-full mt-5' />
           <div className='flex flex-col items-center'>
-            <div className='text-2xl font-bold text-myText-dark'>Name</div>
-            <div className='text-xs text-myText-light'>@User Name</div>
+            <div className='text-2xl font-bold text-myText-dark'>
+              {data?.banana?.user?.userName}
+            </div>
+            <div className='text-xs text-myText-light'>
+              {data?.banana?.user?.userNick}
+            </div>
           </div>
-          <div className='text-dark text-[15px]'>
-            'After logging in, in the Home Page, the user should see all the
-            Tweets on the database, the user should also be able to POST a
-            Tweet.'
-          </div>
+          <div className='text-dark text-[15px]'>{data?.banana?.message}</div>
 
           <div className='pb-4 pt-4 flex justify-between items-center w-full space-x-4'>
             <Button text='Send Message'></Button>
@@ -54,4 +67,4 @@ const DetailTweet: NextPage = () => {
   );
 };
 
-export default DetailTweet;
+export default DetailBanana;

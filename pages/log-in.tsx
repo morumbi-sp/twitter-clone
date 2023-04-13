@@ -8,6 +8,7 @@ import BigBoard from '../components/bigBoard';
 import Link from 'next/link';
 import useMutation from '../lib/client/useMutation';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/router';
 
 interface ConfirmUserForm {
   username: string;
@@ -24,6 +25,13 @@ const Login: NextPage = () => {
   const onValid = ({ username, password }: ConfirmUserForm) => {
     confirmUser({ username, password });
   };
+
+  const router = useRouter();
+  useEffect(() => {
+    if (data.ok) {
+      router.push('/');
+    }
+  }, [data, router]);
   return (
     <div className=''>
       <NavBox>

@@ -10,6 +10,7 @@ import useMutation from '../lib/client/useMutation';
 import { useForm } from 'react-hook-form';
 import { passwordEncrypt } from '../lib/client/utils';
 import { User } from '@prisma/client';
+import { useRouter } from 'next/router';
 
 interface CreateUserForm {
   username: string;
@@ -54,7 +55,12 @@ const CreateAccount: NextPage = () => {
     }
   }, [data]);
 
-  console.log(data);
+  const router = useRouter();
+  useEffect(() => {
+    if (data?.ok) {
+      router.push('/log-in');
+    }
+  }, [data, router]);
   return (
     <>
       <NavBox>
