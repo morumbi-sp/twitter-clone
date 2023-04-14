@@ -8,8 +8,12 @@ const handler = async (
   res: NextApiResponse<ResponseType>
 ) => {
   if (req.method === 'GET') {
+    console.log('MeME');
+    const {
+      session: { user },
+    } = req;
     const profile = await client.user.findUnique({
-      where: { id: req.session.user?.id },
+      where: { id: user?.id },
       include: {
         banana: {},
       },

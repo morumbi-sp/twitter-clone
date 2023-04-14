@@ -23,15 +23,19 @@ const handler = async (
     },
   });
 
-  if (!foundUserInfo)
+  if (!foundUserInfo) {
+    console.log('error');
     return res.json({ ok: false, error: 'Username does not exist!' });
+  }
 
   const passwordMatching = bcrypt.compareSync(
     password,
     foundUserInfo?.password!
   );
-  if (!passwordMatching)
+  if (!passwordMatching) {
+    console.log('pass error');
     return res.json({ ok: false, error: 'Password is not correct!' });
+  }
 
   req.session.user = {
     id: foundUserInfo?.id,

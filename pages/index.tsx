@@ -22,7 +22,7 @@ export interface BananasResponse {
 export default () => {
   const { data } = useSWR<BananasResponse>('/api/tweet');
   const { user } = useUser();
-  console.log(data?.bananas);
+
   return (
     <>
       <NavBox>

@@ -10,6 +10,7 @@ interface ProfileResponse {
 
 const useUser = () => {
   const { data, error } = useSWR<ProfileResponse>('/api/users/me');
+
   const router = useRouter();
   useEffect(() => {
     if (data && !data.ok) {

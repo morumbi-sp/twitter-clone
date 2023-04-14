@@ -1,4 +1,4 @@
-import type { NextPage } from 'next';
+import type { NextApiHandler, NextApiRequest, NextPage } from 'next';
 import React from 'react';
 import HeadTitle from '@/components/headTitle';
 import NavBox from '@/components/navBox';
@@ -7,12 +7,19 @@ import BigBoard from '@/components/bigBoard';
 import NavButton from '@/components/navButton';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import useSWR from 'swr';
 import useUser from '@/lib/client/useUser';
+import { useRouter } from 'next/router';
+import useSWR from 'swr';
+import { NextRequest } from 'next/server';
 
 const DetailTweet: NextPage = () => {
   const { user } = useUser();
-  console.log(user);
+  const router = useRouter();
+
+  const handleLogout = () => {
+    router.push('/log-in');
+  };
+
   return (
     <>
       <NavBox>
@@ -80,6 +87,30 @@ const DetailTweet: NextPage = () => {
                 <span>Likes</span>
               </motion.div>
             </Link>
+
+            <motion.div
+              className='flex flex-col items-center space-y-2'
+              whileHover={{ scale: 1.1 }}
+            >
+              <button
+                className='w-16 h-16 bg-banana-graDark rounded-full flex items-center justify-center'
+                onClick={handleLogout}
+              >
+                <svg
+                  className='h-11 w-11'
+                  stroke='currentColor'
+                  version='1.1'
+                  viewBox='0 0 700 550'
+                  xmlns='http://www.w3.org/2000/svg'
+                >
+                  <path d='m298.59 8.8281c-55.707 13.676-111.44 27.258-167.19 40.742-4.8438 1.1797-5.0742 4.0234-5.0742 7.875-0.10156 58.246-0.24609 116.5-0.42578 174.75-0.16016 84.367-0.32422 168.73-0.49219 253.07 0 5.0625 1.1602 7.5703 6.332 9.3086 62.855 21.086 125.66 42.332 188.41 63.734 1.6953 0.57031 3.4453 0.97266 6.0039 1.6836 0.21875-4.0703 0.55859-7.6562 0.58984-11.188 0.59766-60.434 1.1758-120.87 1.7383-181.3 1.0664-102.61 2.1602-205.21 3.2812-307.82 0.21875-19.895 0.61328-39.781 0.92969-59.676h-1.0938c-10.98 2.9375-21.938 6.0977-33.008 8.8242zm9.9297 286.91c-5.3906 5.4688-13.234 5.1094-18.035-1.1719-5.5469-7.2305-6.3125-15.312-2.7461-23.648 2.2539-5.25 5.8633-9.1875 13.891-9.5391 1.5 0.84375 4.7031 1.9023 6.8906 4.0156 7.6562 7.3281 7.4375 22.836 0 30.328z' />
+                  <path d='m432.86 64.434c4.8789 0 6.6289 1.1602 6.5625 6.3672-0.24219 33.227-0.078125 66.469-0.078125 99.707v11.223c8.75 0 17.621 0.14062 26.25-0.24219 0.83203 0 2.1875-3.3594 2.1875-5.1719 0.16406-20.629 0.12109-41.266 0.12109-61.895v-72.312c0-3.2812 0-5.8633-4.7461-5.8281-33.227 0.1875-66.469 0.097656-99.695 0.12109v-0.003906c-0.94141 0.042968-1.8789 0.13281-2.8125 0.27344v27.859h6.5625c21.844 0 43.719 0.13281 65.648-0.097656z' />
+                  <path d='m462.03 378.44c-7.4141 0.29688-15.008 0.078125-22.664 0.078125l0.003906 99.453h-83.125v28.754c2.1875 0.097656 3.3477 0.27344 4.9453 0.27344 33.566 0 67.102-0.097656 100.62 0.13281 4.9531 0 6.1016-1.5078 6.082-6.168-0.15234-38.863-0.15234-77.727 0-116.58 0.09375-4.5977-1.3711-6.0742-5.8672-5.9414z' />
+                  <path d='m574.9 280-113.34-65.449v43.574h-77.656v43.75h77.656v43.574z' />
+                </svg>
+              </button>
+              <span>Log Out</span>
+            </motion.div>
           </div>
           <Link href='profile/edit'>
             <div>

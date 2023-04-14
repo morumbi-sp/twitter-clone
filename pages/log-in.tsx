@@ -1,5 +1,5 @@
 import type { NextPage } from 'next';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import HeadTitle from '@/components/headTitle';
 import NavBox from '@/components/navBox';
 import Input from '@/components/input';
@@ -9,6 +9,7 @@ import Link from 'next/link';
 import useMutation from '@/lib/client/useMutation';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
+import useSWR, { useSWRConfig } from 'swr';
 
 interface ConfirmUserForm {
   username: string;
@@ -17,21 +18,29 @@ interface ConfirmUserForm {
 
 const Login: NextPage = () => {
   const [confirmUser, { data, loading }] = useMutation('/api/users/confirm');
+  useSWR('/api/users/logout');
+  const router = useRouter();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<ConfirmUserForm>();
   const onValid = ({ username, password }: ConfirmUserForm) => {
+    if (loading) return;
     confirmUser({ username, password });
   };
 
-  const router = useRouter();
+  const { cache } = useSWRConfig();
+  useEffect(() => {
+    cache.delete('/api/users/me');
+  }, []);
+
   useEffect(() => {
     if (data?.ok) {
       router.push('/');
     }
   }, [data, router]);
+
   return (
     <div className=''>
       <NavBox>
